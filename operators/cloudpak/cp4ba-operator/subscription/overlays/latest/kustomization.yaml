@@ -1,0 +1,23 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+
+namespace: cp4ba
+
+bases:
+  - ../../base
+
+patches:
+  - target:
+      kind: Subscription
+      name: ibm-cp4a-operator-catalog-subscription
+    patch: |-
+      - op: replace
+        path: /spec/channel
+        value: 'v22.1'
+  - target:
+      kind: Subscription
+      name: ibm-common-service-operator
+    patch: |-
+      - op: replace
+        path: /spec/channel
+        value: 'v3'
